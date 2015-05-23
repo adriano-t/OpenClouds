@@ -6,7 +6,7 @@ namespace OpenClouds
 {
 	enum ErrorCode
 	{
-		INDEX_OUT_OF_BOUND
+		INDEX_OUT_OF_RANGE
 	};
 	class Exception
 	{
