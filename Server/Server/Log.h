@@ -1,4 +1,9 @@
 #pragma once
 
+#include <string>
 
-void Log(char* str);
+namespace OpenClouds
+{
+	void Log(const char* text);
+	void Log(const std::string& text);
+}

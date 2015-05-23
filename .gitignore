@@ -3,6 +3,8 @@
 
 
 *.opensdf
+*.lib
+Server/Server/MySql/lib/
 
 # User-specific files
 *.suo
