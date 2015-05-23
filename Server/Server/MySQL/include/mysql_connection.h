@@ -27,9 +27,11 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #ifndef _MYSQL_CONNECTION_H_
 #define _MYSQL_CONNECTION_H_
 
+#include <memory>
+
 #include <cppconn/connection.h>
-#include <boost/shared_ptr.hpp>
-#include <boost/scoped_ptr.hpp>
+//#include <boost/shared_ptr.hpp>
+//#include <boost/scoped_ptr.hpp
 
 namespace sql
 {
@@ -172,11 +174,14 @@ private:
 	void init(std::map< sql::SQLString, sql::ConnectPropertyVal > & properties);
 
 	Driver * driver;
-	boost::shared_ptr< NativeAPI::NativeConnectionWrapper > proxy;
+
+	std::shared_ptr< NativeAPI::NativeConnectionWrapper > proxy;
+	//boost::shared_ptr< NativeAPI::NativeConnectionWrapper > proxy;
 
 	/* statement handle to execute queries initiated by driver. Perhaps it is
 	   a good idea to move it to a separate helper class */
-	boost::scoped_ptr< ::sql::mysql::MySQL_Statement > service;
+	std::shared_ptr< ::sql::mysql::MySQL_Statement > service;
+	//boost::scoped_ptr< ::sql::mysql::MySQL_Statement > service;
 
 	MySQL_ConnectionData * intern; /* pimpl */
 

@@ -27,11 +27,15 @@ namespace OpenClouds
 		* @param text	reference to a std::string containing the text.
 		*/
 		void WriteAnsiText(const std::string& text);
+
+
 		/**
 		* @brief Write 4 bytes integer to the buffer.
 		* @param text	reference to a std::string containing the text.
 		*/
 		void WriteInt32(const int32_t value);
+
+
 		/**
 		* @brief Write 2 bytes integer to the buffer.
 		* @param text	reference to a std::string containing the text.
