@@ -11,7 +11,7 @@ using namespace std;
 int main(void)
 {
 	cout << endl;
-	cout << "Running 'SELECT 'Hello World!'  >> AS _message'..." << endl;
+	cout << "SELECT * FROM openclouds.users" << endl;
 
 		try {
 		sql::Driver *driver;

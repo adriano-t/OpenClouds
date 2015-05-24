@@ -7,6 +7,9 @@
 
 namespace OpenClouds
 {
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/**
 	* @brief Buffer is a class which is a buffer.
 	*/
@@ -23,32 +26,95 @@ namespace OpenClouds
 		Buffer(Buffer&);
 
 		/**
-		* @brief Write ansi character string to the buffer.
-		* @param text	reference to a std::string containing the text.
+		* @brief Insert an ansi character string into the buffer.
+		* The string is inserted at the position pointed by the @c index, which is then
+		* automatically increased by the number of bytes inserted.
+		* @param text	Reference to a std::string containing the text.
 		*/
 		void WriteAnsiText(const std::string& text);
 
 
 		/**
-		* @brief Write 4 bytes integer to the buffer.
-		* @param text	reference to a std::string containing the text.
+		* @brief Insert a 4 bytes integer into the buffer.
+		* The bytes are inerted at the position pointed by the @c index, which is then
+		* automatically increased by the number of bytes inserted.
+		* @param value	The 4 bytes integer to be inserted.
 		*/
 		void WriteInt32(const int32_t value);
 
 
 		/**
-		* @brief Write 2 bytes integer to the buffer.
-		* @param text	reference to a std::string containing the text.
+		* @brief Insert a 2 bytes integer into the buffer.
+		* The bytes are inserted at the position pointed by the @c index, which is then
+		* automatically increased by the number of bytes inserted.
+		* @param value	The 2 bytes integer to be inserted.
 		*/
 		void WriteInt16(const int16_t value);
+
+		/**
+		* @brief Insert a byte into the buffer.
+		* The byte is inserted at the position pointed by the @c index, which is then
+		* automatically increased by 1.
+		* @param value	The byte to be inserted.
+		*/
 		void WriteInt8(const int8_t value);
+
+		/**
+		* @brief Insert generic data into the buffer.
+		* Insert @p len bytes into the buffer at the position pointed by the @c
+		* index. The bytes are taken from the buffer @p src. The @c index is then automatically
+		* increased by the number of bytes inserted.
+		* @param src	The source buffer.
+		* @param len	The number of bytes to insert from @p src
+		*/
 		void Write(const void* src, const int len);
+
+		/**
+		* @brief Insert generic data into the buffer.
+		* Insert @p len bytes into the buffer at the position pointed by the @c
+		* index. The bytes are taken from the buffer @p src starting from the
+		* @offset position. The @c index is then automatically increased by the
+		* the number of bytes inserted.
+		* @param src	The source data.
+		* @param len	The number of bytes to insert from @p src
+		* @param offset	The position of the first byte inside @p src
+		*/
 		void Write(const void* src, const int len, const int offset);
 
+
+		/**
+		* @brief Change the position of the @c index.
+		* @param pos	The new position of the @c index.
+		*/
 		void Seek(const int pos);
+		/**
+		* @return The current value of @c index.
+		*/
+		int GetIndex();
+
+		/**
+		* @return The current size of the buffer in bytes.
+		*/
 		int GetSize();
 
+		
+		/**
+		* @brief Read generic data from the buffer.
+		* Reads @p len bytes into @p dest.
+		* @param dest	The destination of the read data.
+		* @param len	The number of bytes to read.
+		*/
 		void Read(const void* dest, const int len);
+
+		/**
+		* @brief Read generic data from the buffer.
+		* Reads @p len bytes into @p dest.
+		* @param dest	The destination of the read data.
+		* @param len	The number of bytes to read.
+		* @param offset	The position of the first byte written into  @p dest.
+		*/
+		void Read(const void* dest, const int offset, const int len);
+
 		int32_t ReadInt32();
 		int16_t ReadInt16();
 		int8_t ReadInt8();
