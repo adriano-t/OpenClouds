@@ -3,8 +3,7 @@ Dati
 Database: openclouds
 Nome utente: openclouds
 Email: openclouds@divermail.com
-porta: porta è 3306
-password: tizzioslascio
+porta: 3306
 
 
 ---------------------
