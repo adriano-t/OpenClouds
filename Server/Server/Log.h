@@ -1,9 +1,20 @@
 #pragma once
+#ifndef OC_LOG_H
+#define OC_LOG_H
 
+#include <stdlib.h>
 #include <string>
 
 namespace OpenClouds
 {
-	void Log(const char* text);
-	void Log(const std::string& text);
+	class Log
+	{
+	private:
+		static std::string appName;
+	public:
+		static void Write(const std::string& text);
+	};
+	
 }
+
+#endif // OC_LOG_H

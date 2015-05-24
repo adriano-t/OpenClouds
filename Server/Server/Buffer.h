@@ -5,11 +5,10 @@
 #include <stdint.h>
 #include <string>
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace OpenClouds
 {
-////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	/**
 	* @brief Buffer is a class which is a buffer.
 	*/
@@ -27,6 +26,7 @@ namespace OpenClouds
 
 		/**
 		* @brief Insert an ansi character string into the buffer.
+		* 
 		* The string is inserted at the position pointed by the @c index, which is then
 		* automatically increased by the number of bytes inserted.
 		* @param text	Reference to a std::string containing the text.
@@ -36,6 +36,7 @@ namespace OpenClouds
 
 		/**
 		* @brief Insert a 4 bytes integer into the buffer.
+		* 
 		* The bytes are inerted at the position pointed by the @c index, which is then
 		* automatically increased by the number of bytes inserted.
 		* @param value	The 4 bytes integer to be inserted.
@@ -45,6 +46,7 @@ namespace OpenClouds
 
 		/**
 		* @brief Insert a 2 bytes integer into the buffer.
+		* 
 		* The bytes are inserted at the position pointed by the @c index, which is then
 		* automatically increased by the number of bytes inserted.
 		* @param value	The 2 bytes integer to be inserted.
@@ -53,6 +55,7 @@ namespace OpenClouds
 
 		/**
 		* @brief Insert a byte into the buffer.
+		* 
 		* The byte is inserted at the position pointed by the @c index, which is then
 		* automatically increased by 1.
 		* @param value	The byte to be inserted.
@@ -61,6 +64,7 @@ namespace OpenClouds
 
 		/**
 		* @brief Insert generic data into the buffer.
+		* 
 		* Insert @p len bytes into the buffer at the position pointed by the @c
 		* index. The bytes are taken from the buffer @p src. The @c index is then automatically
 		* increased by the number of bytes inserted.
@@ -71,9 +75,10 @@ namespace OpenClouds
 
 		/**
 		* @brief Insert generic data into the buffer.
+		* 
 		* Insert @p len bytes into the buffer at the position pointed by the @c
 		* index. The bytes are taken from the buffer @p src starting from the
-		* @offset position. The @c index is then automatically increased by the
+		* @offset position. @c index is then automatically increased by the
 		* the number of bytes inserted.
 		* @param src	The source data.
 		* @param len	The number of bytes to insert from @p src
@@ -99,8 +104,12 @@ namespace OpenClouds
 
 		
 		/**
-		* @brief Read generic data from the buffer.
-		* Reads @p len bytes into @p dest.
+		* @brief Reads general data from the buffer.
+		* 
+		* Reads @p len bytes from the buffer and copies them to @p dest. @c index is the position
+		* of the first byte read from the buffer. @c index is then automatically increased by the
+		* number of bytes read.
+		*
 		* @param dest	The destination of the read data.
 		* @param len	The number of bytes to read.
 		*/
@@ -108,6 +117,7 @@ namespace OpenClouds
 
 		/**
 		* @brief Read generic data from the buffer.
+		* 
 		* Reads @p len bytes into @p dest.
 		* @param dest	The destination of the read data.
 		* @param len	The number of bytes to read.
@@ -115,12 +125,49 @@ namespace OpenClouds
 		*/
 		void Read(const void* dest, const int offset, const int len);
 
+		/**
+		* @brief Read a 4 bytes integer from the buffer.
+		* 
+		* Reads and returns a 4 bytes integer from the buffer starting at position @c index.
+		* After reading, @c index is automatically increased by the number of bytes read.
+		*
+		* @return the integer read from the buffer.
+		*/
 		int32_t ReadInt32();
+
+		/**
+		* @brief Read a 2 bytes integer from the buffer.
+		*
+		* Reads and returns a 2 bytes integer from the buffer starting at position @c index.
+		* After reading, @c index is automatically increased by the number of bytes read.
+		*
+		* @return the integer read from the buffer.
+		*/
 		int16_t ReadInt16();
+
+		/**
+		* @brief Read a byte integer from the buffer.
+		*
+		* Reads and returns a 1 byte integer from the buffer starting at position @c index.
+		* After reading, @c index is automatically increased by 1.
+		*
+		* @return the integer read from the buffer.
+		*/
 		int8_t ReadInt8();
 
-		char operator [](int i);
+		/*
+		* @brief Reads and return the byte at position @p i.
+		*
+		* This function does not modify @c index.
+		* 
+		* @param i	The position of the byte to read.
+		* @return The byte at position @p i.
+		*/
+		int8_t operator [](int i);
 
+		/*
+		* @brief utterly clears the buffer
+		*/
 		void Clear();
 
 	};

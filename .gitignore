@@ -5,6 +5,9 @@
 
 *.opensdf
 *.lib
+*.png
+Server/doc/
+
 Server/Server/MySql/lib/
 
 # User-specific files
