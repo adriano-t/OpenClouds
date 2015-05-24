@@ -21,21 +21,29 @@ int main(void)
 
 		/* Create a connection */
 		driver = get_driver_instance();
-		con = driver->connect("tcp://db4free.net:3306", "openclouds", "tizzioslascio");
+		
+
+		sql::SQLString hosting = "tcp://db4free.net:3306";
+		sql::SQLString user = "openclouds";
+		std::cout << "Insert the password for " << hosting.c_str() << ": ";
+		
+		std::string inputPassword;
+		std::cin >> inputPassword;
+		sql::SQLString password = inputPassword.c_str();
+
+		con = driver->connect(hosting, user, password);
 		/* Connect to the MySQL test database */
 		con->setSchema("openclouds");
 
 		stmt = con->createStatement();
 		res = stmt->executeQuery("SELECT * FROM openclouds.users");
-
-		cout << "\t... MySQL replies: ";
+		 
 		while (res->next()) {
 			cout << "\t... MySQL replies: ";
 			/* Access column data by alias or column name */
-			cout << res->getString("CSFAcol") << endl;
-			cout << "\t... MySQL says it again: ";
-			cout << res->getString(2+1) << endl << flush;
+			cout << res->getString("name").c_str() << endl; 
 			/* Access column fata by numeric offset, 1 is the first column */
+			cout << res->getString(3).c_str() << endl << flush;
 		}
 		delete res;
 		delete stmt;
@@ -51,6 +59,13 @@ int main(void)
 	}
 
 	cout << endl;
+	 
+#ifdef _WIN32
+	system("pause");
+#else
 	getchar();
+#endif
+
+
 	return EXIT_SUCCESS;
 }
