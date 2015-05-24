@@ -21,13 +21,14 @@ int main(void)
 
 		/* Create a connection */
 		driver = get_driver_instance();
-		con = driver->connect("tcp://127.0.0.1:3306", "root", "root");
+		con = driver->connect("tcp://db4free.net:3306", "openclouds", "tizzioslascio");
 		/* Connect to the MySQL test database */
-		con->setSchema("test");
+		con->setSchema("openclouds");
 
 		stmt = con->createStatement();
-		res = stmt->executeQuery("SELECT * FROM test.csfa");
+		res = stmt->executeQuery("SELECT * FROM openclouds.users");
 
+		cout << "\t... MySQL replies: ";
 		while (res->next()) {
 			cout << "\t... MySQL replies: ";
 			/* Access column data by alias or column name */
@@ -50,6 +51,6 @@ int main(void)
 	}
 
 	cout << endl;
-
+	getchar();
 	return EXIT_SUCCESS;
 }
