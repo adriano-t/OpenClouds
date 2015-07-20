@@ -9,18 +9,23 @@
 
 namespace OpenClouds
 {
-	enum ErrorCode
-	{
-		INDEX_OUT_OF_RANGE
-	};
+
 	class Exception
 	{
-		ErrorCode err;
 		std::string errMessage;
+		Exception* nestedException;
 	public:
-		Exception(ErrorCode ec);
-		void AppendMessage(std::string& msg);
+		Exception(const std::string errMessage)
+		{
+			this->errMessage = errMessage;
+			nestedException = nullptr;
+		}
 
+		Exception(const std::string errMessage, Exception* nestedException)
+		{
+			this->errMessage = errMessage;
+			this->nestedException = nestedException;
+		}
 		//display error and exit from the program
 		void Handle();
 	};

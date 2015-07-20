@@ -13,6 +13,7 @@ namespace OpenClouds
 		static std::string appName;
 	public:
 		static void Write(const std::string& text);
+		static void Write(const std::string& tag, const std::string& text);
 	};
 	
 }
