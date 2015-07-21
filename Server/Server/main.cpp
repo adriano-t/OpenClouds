@@ -6,12 +6,24 @@
 #include "MySQL\include\cppconn\resultset.h"
 #include "MySQL\include\cppconn\statement.h"
 
+#include "Packet.h"
 using namespace std;
 
 int main(void)
 {
+
+	OpenClouds::PacketTime date1{ 2015, 12, 30, 18, 6, 7 };
+	OpenClouds::PacketTime date2{ 2015, 12, 30, 18, 6, 8 };
+	cout << (date1 < date2 ? "lt" : "not lt") << endl;
+	cout << (date1 > date2 ? "gt" : "not gt") << endl;
+	cout << (date1 < date2 ? "e" : "not e") << endl;
+
 	cout << endl;
 	cout << "SELECT * FROM openclouds.users" << endl;
+
+	
+
+
 
 		try {
 		sql::Driver *driver;
@@ -58,6 +70,8 @@ int main(void)
 		cout << ", SQLState: " << e.getSQLState() << " )" << endl;
 	}
 
+
+	
 	cout << endl;
 	 
 #ifdef _WIN32

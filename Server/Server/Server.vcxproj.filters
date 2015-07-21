@@ -35,6 +35,15 @@
     <ClInclude Include="ErrorHandling.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DateTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="TCPServer.h">
       <Filter>Header Files</Filter>
     </ClInclude>

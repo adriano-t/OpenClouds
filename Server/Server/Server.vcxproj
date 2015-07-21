@@ -86,9 +86,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer.h" />
+    <ClInclude Include="DateTime.h" />
     <ClInclude Include="ErrorHandling.h" />
+    <ClInclude Include="Header.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="readme.h" />
+    <ClInclude Include="Packet.h" />
     <ClInclude Include="TCPServer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
