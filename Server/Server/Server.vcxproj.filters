@@ -47,5 +47,8 @@
     <ClInclude Include="TCPServer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,14 +6,14 @@
 #include "MySQL\include\cppconn\resultset.h"
 #include "MySQL\include\cppconn\statement.h"
 
-#include "Packet.h"
+#include "Time.h"
 using namespace std;
 
 int main(void)
 {
 
-	OpenClouds::PacketTime date1{ 2015, 12, 30, 18, 6, 7 };
-	OpenClouds::PacketTime date2{ 2015, 12, 30, 18, 6, 8 };
+	OpenClouds::Time date1{ 2015, 12, 30, 18, 6, 7 };
+	OpenClouds::Time date2{ 2015, 12, 30, 18, 6, 8 };
 	cout << (date1 < date2 ? "lt" : "not lt") << endl;
 	cout << (date1 > date2 ? "gt" : "not gt") << endl;
 	cout << (date1 < date2 ? "e" : "not e") << endl;
