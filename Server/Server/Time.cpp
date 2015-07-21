@@ -3,6 +3,12 @@
 
 namespace OpenClouds
 {
+
+	bool Time::operator == (const Time& pd) const
+	{
+		return(year == pd.year && month == pd.month && day == pd.day && hour == pd.hour && minutes == pd.minutes && seconds == pd.seconds);
+	};
+	
 	bool Time::operator > (const Time& pd) const
 	{
 		if (year > pd.year)

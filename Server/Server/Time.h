@@ -40,10 +40,7 @@ namespace OpenClouds
 		}
 
 		//check if the two dates are equal
-		bool operator == (const Time& pd) const
-		{
-			return(year == pd.year && month == pd.month && day == pd.day && hour == pd.hour && minutes == pd.minutes && seconds == pd.seconds);
-		};
+		bool operator == (const Time& pd) const;
 
 		//greater than operator
 		bool operator > (const Time& pd) const;
