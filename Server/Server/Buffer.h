@@ -1,6 +1,6 @@
 #pragma once
-#ifndef BUFFER_H
-#define BUFFER_H 0x414E41414E49
+#ifndef OC_BUFFER_H
+#define OC_BUFFER_H 0x414E41414E49
 
 #include <stdint.h>
 #include <string>

@@ -83,12 +83,11 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TCPServer.cpp" />
+    <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer.h" />
-    <ClInclude Include="DateTime.h" />
     <ClInclude Include="ErrorHandling.h" />
-    <ClInclude Include="Header.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="readme.h" />
     <ClInclude Include="Packet.h" />

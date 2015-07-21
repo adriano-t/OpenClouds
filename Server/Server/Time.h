@@ -1,23 +1,28 @@
-
 #pragma once
-#ifndef TIME_H
-#define TIME_H
+
+#ifndef OC_TIME_H
+#define OC_TIME_H
 
 #include <cstdint>
 
 namespace OpenClouds
 {
-
 	class Time
 	{
-	public:
+	private:
+		static const int64_t secsInMinute = 60;
+		static const int64_t secsInHour = secsInMinute * 60;
+		static const int64_t secsInDay = secsInHour * 24;
+		static const int64_t secsInMonth = secsInDay * 31;
+		static const int64_t secsInYear = secsInMonth * 12;
 
+	public:
 		int16_t year;
 		int8_t month;
 		int8_t day;
 		int8_t hour;
-		int8_t minute;
-		int8_t second;
+		int8_t minutes;
+		int8_t seconds;
 
 
 		Time(int16_t year, int8_t month, int8_t day, int8_t hour, int8_t minute, int8_t second)
@@ -26,48 +31,28 @@ namespace OpenClouds
 			this->month = month;
 			this->day = day;
 			this->hour = hour;
-			this->minute = minute;
-			this->second = second;
+			this->minutes = minute;
+			this->seconds = second;
 		}
 
-		Time() : year(year), month(month), day(day), hour(hour), minute(minute), second(second){
+		Time() : year(year), month(0), day(0), hour(0), minutes(0), seconds(0)
+		{
 		}
 
 		//check if the two dates are equal
 		bool operator == (const Time& pd) const
 		{
-			return(year == pd.year && month == pd.month && day == pd.day && hour == pd.hour && minute == pd.minute && second == pd.second);
+			return(year == pd.year && month == pd.month && day == pd.day && hour == pd.hour && minutes == pd.minutes && seconds == pd.seconds);
 		};
 
 		//greater than operator
-		bool operator > (const Time& pd) const
-		{
-			if (year > pd.year)
-				return true;
-			else if (year == pd.year)
-			{
-				if ((month * 2592000 + day * 86400 + hour * 3600 + minute * 60 + second) > (pd.month * 2592000 + pd.day * 86400 + pd.hour * 3600 + pd.minute * 60 + pd.second))
-					return true;
-			}
-			return false;
-		};
-
+		bool operator > (const Time& pd) const;
 		//less than operator
-		bool operator < (const Time& pd) const
-		{
-			if (year < pd.year)
-				return true;
-			else if (year == pd.year)
-			{
-				if ((month * 2592000 + day * 86400 + hour * 3600 + minute * 60 + second) < (pd.month * 2592000 + pd.day * 86400 + pd.hour * 3600 + pd.minute * 60 + pd.second))
-					return true;
-			}
-			return false;
-		};
+		bool operator < (const Time& pd) const;
 
+		int64_t toInt64();
+		void fromInt64(int64_t dateTime);
 	};
-
-
 }
 
 

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef PACKET_H
-#define PACKET_H
+#ifndef OC_PACKET_H
+#define OC_PACKET_H
 
 #include <cstdint>
 
