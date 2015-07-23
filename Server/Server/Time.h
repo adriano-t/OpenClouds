@@ -47,7 +47,8 @@ namespace OpenClouds
 		//less than operator
 		bool operator < (const Time& pd) const;
 
-		int64_t toInt64();
+		int64_t toInt64() const;
+
 		void fromInt64(int64_t dateTime);
 	};
 }

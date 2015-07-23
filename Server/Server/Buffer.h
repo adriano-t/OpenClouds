@@ -9,13 +9,18 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace OpenClouds
 {
+
+	enum class BufferSeek{
+		Start, Relative, End
+	};
+
 	/**
 	* @brief Buffer is a class which is a buffer.
 	*/
 	class Buffer
 	{
 	private:
-		char* data;
+		int8_t* data;
 		int size;
 		int index;
 
@@ -89,18 +94,26 @@ namespace OpenClouds
 
 		/**
 		* @brief Change the position of the @c index.
-		* @param pos	The new position of the @c index.
+		* @param seek	The start position.
+		* @param offset	The offset added to the position.
 		*/
-		void Seek(const int pos);
+		void Seek(BufferSeek seek, const int offset);
+		
+		/**
+		* @brief Change	the position of the @c index.
+		* @param position	The new position
+		*/
+		void Seek(const int position);
+		
 		/**
 		* @return The current value of @c index.
 		*/
-		int GetIndex();
+		int GetIndex() const;
 
 		/**
 		* @return The current size of the buffer in bytes.
 		*/
-		int GetSize();
+		int GetSize() const;
 
 		
 		/**

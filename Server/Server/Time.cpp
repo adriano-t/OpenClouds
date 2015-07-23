@@ -8,32 +8,22 @@ namespace OpenClouds
 	{
 		return(year == pd.year && month == pd.month && day == pd.day && hour == pd.hour && minutes == pd.minutes && seconds == pd.seconds);
 	};
-	
-	bool Time::operator > (const Time& pd) const
+	 
+	bool Time::operator> (const Time& pd) const
 	{
-		if (year > pd.year)
-			return true;
-		else if (year == pd.year)
-		{
-			if ((month * 2592000 + day * 86400 + hour * 3600 + minutes * 60 + seconds) > (pd.month * 2592000 + pd.day * 86400 + pd.hour * 3600 + pd.minutes * 60 + pd.seconds))
-				return true;
-		}
+		if (year > pd.year || toInt64() > pd.toInt64())
+			return true; 
 		return false;
 	};
 
 	bool Time::operator < (const Time& pd) const
 	{
-		if (year < pd.year)
+		if (year < pd.year || toInt64() < pd.toInt64())
 			return true;
-		else if (year == pd.year)
-		{
-			if ((month * 2592000 + day * 86400 + hour * 3600 + minutes * 60 + seconds) < (pd.month * 2592000 + pd.day * 86400 + pd.hour * 3600 + pd.minutes * 60 + pd.seconds))
-				return true;
-		}
 		return false;
 	};
 
-	int64_t Time::toInt64()
+	int64_t Time::toInt64() const
 	{
 		// Seconds past from age 0.
 		int64_t secondsCount = (int64_t)seconds + ((int64_t)minutes) * secsInMinute + ((int64_t)hour) * secsInHour +
