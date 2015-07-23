@@ -19,7 +19,8 @@
 	}
 
 
-## DECISIONS:
+DECISIONS:
+--------------
 - Server: thread principale con receive, riempie una queue, thread secondario serve i pacchetti 
 nell'ordine di ricezione.
 Gestione pacchetti e files in swap con HD secondo limiti fissati.
