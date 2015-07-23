@@ -25,6 +25,9 @@ namespace OpenClouds
 		int index;
 		int blockSize;
 
+		//internal function, used only here
+		void IncreaseSize(const int amount);
+
 	public:
 		Buffer();
 		Buffer(const int startSize, const int blockSize);

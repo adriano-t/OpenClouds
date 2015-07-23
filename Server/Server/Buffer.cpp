@@ -54,10 +54,19 @@ namespace OpenClouds
 		return index;
 	}
 
+	void Buffer::IncreaseSize(const int amount)
+	{
+		size += amount;
+		if ((data = (int8_t*)realloc(data, size)) == nullptr)
+		{
+			// throw(new MemoryException("error: impossible to allocate the buffer"));
+		}
+
+	}
 
 	void Buffer::WriteInt32(const int32_t value)
 	{
-		int diff = size - (index + 1);
+		int diff = (size - 1) - index;
 
 		if (diff >= sizeof(int32_t))
 		{
@@ -68,12 +77,35 @@ namespace OpenClouds
 		}
 		else
 		{
-			//resize the data buffer
-			size += blockSize;
-			if ((data = (int8_t*)realloc(data, size)) == nullptr)
-			{
-				// throw(new MemoryException("error: impossible to allocate the buffer"));
-			}
+			IncreaseSize(blockSize);
+		}
+	}
+
+
+	void Buffer::WriteInt16(const int16_t value)
+	{
+		int diff = (size - 1) - index;
+
+		if (diff >= sizeof(int16_t))
+		{
+			data[index++] = value;
+			data[index++] = (value >> 1);
+		}
+		else
+		{
+			IncreaseSize(blockSize);
+		}
+	}
+
+	void Buffer::WriteInt8(const int8_t value)
+	{
+		if (size - 1 > index)
+		{
+			data[index++] = value;
+		}
+		else
+		{
+			IncreaseSize(blockSize);
 		}
 	}
  
