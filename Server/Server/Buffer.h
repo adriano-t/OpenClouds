@@ -23,11 +23,22 @@ namespace OpenClouds
 		int8_t* data;
 		int size;
 		int index;
+		int blockSize;
 
 	public:
 		Buffer();
+		Buffer(const int startSize, const int blockSize);
 		~Buffer();
 		Buffer(Buffer&);
+
+		/**
+		* @brief Reserve memory for the buffer
+		*
+		* Create memory space to avoid the resizing during the write operation
+		* @param size	the number of bytes to reserve
+		*/
+		void Reserve(const int size);
+
 
 		/**
 		* @brief Insert an ansi character string into the buffer.
