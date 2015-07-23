@@ -43,7 +43,7 @@ namespace OpenClouds
 
 	void Buffer::WriteInt32(const int32_t value)
 	{
-		int diff = size - index;
+		int diff = size - (index + 1);
 
 		if (diff >= sizeof(int32_t))
 		{
