@@ -90,10 +90,12 @@
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="ErrorHandling.h" />
     <ClInclude Include="Log.h" />
-    <ClInclude Include="readme.h" />
     <ClInclude Include="Packet.h" />
     <ClInclude Include="TCPServer.h" />
     <ClInclude Include="Time.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="readme.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
