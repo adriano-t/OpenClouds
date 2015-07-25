@@ -273,8 +273,7 @@ namespace OpenClouds
 		}
 	}
 
-	//Does not work
-	int8_t Buffer::operator [](int i) const
+	int8_t &Buffer::operator[](int i) const
 	{
 		if (i > 0 && i < size)
 			return data[i];
@@ -282,7 +281,7 @@ namespace OpenClouds
 			//throw(new MemoryException("error: impossible to allocate the buffer"));
 			return 0;
 		}
-	}
+	} 
 
 	void Buffer::WriteString(const std::string& str)
 	{

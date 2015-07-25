@@ -30,6 +30,9 @@ int main(void)
 
 	cout << "buffer size: " << to_string(buf->GetSize()) << endl;
 
+	//get the third element
+	cout << (*buf)[3] << endl;
+
 	buf->WriteInt32(-1000000);
 	buf->WriteUint32(1000000);
 
