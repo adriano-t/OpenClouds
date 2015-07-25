@@ -259,7 +259,7 @@ namespace OpenClouds
 		* @param i	The position of the byte to read.
 		* @return The byte at position @p i.
 		*/
-		int8_t &operator[](int i) const;
+		int8_t operator[](int i) const;
 
 		int8_t Buffer::GetByte(int i) const;
 

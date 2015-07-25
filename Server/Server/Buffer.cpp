@@ -273,7 +273,7 @@ namespace OpenClouds
 		}
 	}
 
-	int8_t &Buffer::operator[](int i) const
+	int8_t Buffer::operator[](int i) const
 	{
 		if (i > 0 && i < size)
 			return data[i];
