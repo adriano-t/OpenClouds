@@ -34,25 +34,25 @@ int main(void)
 	cout << (*buf)[3] << endl;
 
 	buf->WriteInt32(-1000000);
-	buf->WriteUint32(1000000);
+	buf->WriteInt32(1000000);
 
 	buf->WriteInt16(-4096);
-	buf->WriteUint16(4096);
+	buf->WriteInt16(4096);
 
 	buf->WriteInt8(-127);
-	buf->WriteUint8(127);
+	buf->WriteInt8(127);
 	
 
 	buf->Seek(0);
-	 
-	cout << "read: " << buf->ReadInt32() << endl;
-	cout << "read: " << to_string(buf->ReadUint32()) << endl;
+
+	cout << "read: " << to_string(buf->ReadInt32()) << endl;
+	cout << "read: " << to_string(buf->ReadInt32()) << endl;
 
 	cout << "read: " << to_string(buf->ReadInt16()) << endl;
-	cout << "read: " << to_string(buf->ReadUint16()) << endl;
+	cout << "read: " << to_string(buf->ReadInt16()) << endl;
 
 	cout << "read: " << to_string(buf->ReadInt8()) << endl;
-	cout << "read: " << to_string(buf->ReadUint8()) << endl;
+	cout << "read: " << to_string(buf->ReadInt8()) << endl;
 
 
 
