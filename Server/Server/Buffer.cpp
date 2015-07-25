@@ -67,7 +67,7 @@ namespace OpenClouds
 		size += amount;
 		if ((data = (int8_t*)realloc(data, size)) == nullptr)
 		{
-			// throw(new MemoryException("error: impossible to allocate the buffer"));
+			throw;//new MemoryException("error: impossible to allocate the buffer"));
 		}
 
 	}
@@ -94,7 +94,7 @@ namespace OpenClouds
 		}
 		else
 		{
-			//throw(new BufferReadException("error: int32_t buffer size less than 4 bytes"));
+			throw;//new BufferReadException("error: int32_t buffer size less than 4 bytes"));
 			return 0;
 		}
 	}
@@ -121,7 +121,7 @@ namespace OpenClouds
 		}
 		else
 		{
-			//throw(new BufferReadException("error: int32_t buffer size less than 4 bytes"));
+			throw;//new BufferReadException("error: int32_t buffer size less than 4 bytes"));
 			return 0;
 		}
 	} 
@@ -144,7 +144,7 @@ namespace OpenClouds
 		}
 		else
 		{
-			//throw(new BufferReadException("error: int32_t buffer size less than 4 bytes"));
+			throw;//new BufferReadException("error: int32_t buffer size less than 4 bytes"));
 			return 0;
 		}
 	}
@@ -155,7 +155,7 @@ namespace OpenClouds
 		this->size = size;
 		if ((data = (int8_t*)realloc(data, size)) == nullptr)
 		{
-			//throw(new MemoryException("error: impossible to allocate the buffer"));
+			throw;//new MemoryException("error: impossible to allocate the buffer"));
 		}
 	}
 
@@ -165,7 +165,7 @@ namespace OpenClouds
 		if (i >= 0 && i < size)
 			return data[i];
 		else{
-			//throw(new MemoryException("error: impossible to allocate the buffer"));
+			throw;//new MemoryException("error: impossible to allocate the buffer"));
 			return 0;
 		}
 	}
@@ -175,7 +175,7 @@ namespace OpenClouds
 		if (i > 0 && i < size)
 			return data[i];
 		else{
-			//throw(new MemoryException("error: impossible to allocate the buffer"));
+			throw;//(new MemoryException("error: impossible to allocate the buffer"))
 			return 0;
 		}
 	} 
@@ -186,7 +186,7 @@ namespace OpenClouds
 		int diff = (index + str.length() * sizeof(char) + 1) - size;
 		if (diff >= 0)
 		{
-			IncreaseSize(diff + blockSize);
+			IncreaseSize(diff);
 		} 
 
 		for (char c : str)

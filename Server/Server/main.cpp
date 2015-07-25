@@ -26,16 +26,18 @@ int main(void)
 	*/
 
 
-	Buffer* buf = new Buffer(128, 32);
+	Buffer* buf = new Buffer(1, 32);
 
-	cout << "buffer size: " << to_string(buf->GetSize()) << endl;
+	cout << ">> start size: " << to_string(buf->GetSize()) << endl;
+
+
+	buf->WriteString("Hi m8!");
+
+	cout << ">> buf size after string: " << to_string(buf->GetSize()) << endl;
 
 	//get the third element
 	cout << (*buf)[3] << endl;
 
-
-	buf->WriteString("Ciao come stai?");
-	
 	buf->WriteInt32(-1000000);
 	buf->WriteInt32(1000000);
 
@@ -44,7 +46,9 @@ int main(void)
 
 	buf->WriteInt8(-127);
 	buf->WriteInt8(255);
-	
+
+	cout << ">> buf size after data: " << to_string(buf->GetSize()) << endl;
+	cout << ">> used bytes: " << to_string(buf->GetIndex()) << endl;
 
 	buf->Seek(0);
 
