@@ -33,6 +33,9 @@ int main(void)
 	//get the third element
 	cout << (*buf)[3] << endl;
 
+
+	buf->WriteString("Ciao come stai?");
+	
 	buf->WriteInt32(-1000000);
 	buf->WriteInt32(1000000);
 
@@ -40,11 +43,13 @@ int main(void)
 	buf->WriteInt16(4096);
 
 	buf->WriteInt8(-127);
-	buf->WriteInt8(127);
+	buf->WriteInt8(255);
 	
 
 	buf->Seek(0);
 
+	cout << "read: " << buf->ReadString() << endl;
+
 	cout << "read: " << to_string(buf->ReadInt32()) << endl;
 	cout << "read: " << to_string(buf->ReadInt32()) << endl;
 
@@ -52,9 +57,7 @@ int main(void)
 	cout << "read: " << to_string(buf->ReadInt16()) << endl;
 
 	cout << "read: " << to_string(buf->ReadInt8()) << endl;
-	cout << "read: " << to_string(buf->ReadInt8()) << endl;
-
-
+	cout << "read: " << to_string((uint8_t)buf->ReadInt8()) << endl;
 
 	try {
 		sql::Driver *driver;

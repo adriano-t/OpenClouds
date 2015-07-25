@@ -181,23 +181,28 @@ namespace OpenClouds
 	} 
 
 	void Buffer::WriteString(const std::string& str)
-	{
-		int diff = (index + str.length() * sizeof(char) + 2) - size;
+	{ 
+
+		int diff = (index + str.length() * sizeof(char) + 1) - size;
 		if (diff >= 0)
 		{
 			IncreaseSize(diff + blockSize);
-		}
+		} 
 
 		for (char c : str)
 		{
 			data[index++] = c;
 		}
+		
+		data[index++] = '\0';
 	}
 
 	std::string Buffer::ReadString()
-	{
-		
-		return "not implemented";
+	{ 
+		const char* tempData = (char*)(data + index);
+		string str = string(tempData);
+		index += str.length() + 1;
+		return str;
 	}
 
 }
