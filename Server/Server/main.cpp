@@ -7,11 +7,14 @@
 #include "MySQL\include\cppconn\statement.h"
 
 #include "Time.h"
+#include "Buffer.h"
 using namespace std;
+using namespace OpenClouds;
 
 int main(void)
 {
 
+	/* time.h test
 	OpenClouds::Time date1{ 2015, 12, 30, 18, 6, 7 };
 	OpenClouds::Time date2{ 2015, 12, 30, 18, 6, 8 };
 	cout << (date1 < date2 ? "lt" : "not lt") << endl;
@@ -20,12 +23,37 @@ int main(void)
 
 	cout << endl;
 	cout << "SELECT * FROM openclouds.users" << endl;
+	*/
 
+
+	Buffer* buf = new Buffer(128, 32);
+
+	cout << "buffer size: " << to_string(buf->GetSize()) << endl;
+
+	buf->WriteInt32(-1000000);
+	buf->WriteUint32(1000000);
+
+	buf->WriteInt16(-4096);
+	buf->WriteUint16(4096);
+
+	buf->WriteInt8(-127);
+	buf->WriteUint8(127);
 	
 
+	buf->Seek(0);
+	 
+	cout << "read: " << buf->ReadInt32() << endl;
+	cout << "read: " << to_string(buf->ReadUint32()) << endl;
+
+	cout << "read: " << to_string(buf->ReadInt16()) << endl;
+	cout << "read: " << to_string(buf->ReadUint16()) << endl;
+
+	cout << "read: " << to_string(buf->ReadInt8()) << endl;
+	cout << "read: " << to_string(buf->ReadUint8()) << endl;
 
 
-		try {
+
+	try {
 		sql::Driver *driver;
 		sql::Connection *con;
 		sql::Statement *stmt;

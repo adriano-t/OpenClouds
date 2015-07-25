@@ -44,18 +44,27 @@ namespace OpenClouds
 
 
 		/**
-		* @brief Insert an ansi character string into the buffer.
-		* 
+		* @brief Insert an utf8 string into the buffer.
+		*
 		* The string is inserted at the position pointed by the @c index, which is then
 		* automatically increased by the number of bytes inserted.
-		* @param text	Reference to a std::string containing the text.
+		* @param str	Reference to a std::string containing the text.
 		*/
-		void WriteAnsiText(const std::string& text);
+		void WriteString(const std::string& str);
+
+
+		/**
+		* @brief Read a utf8 string from the buffer
+		*
+		* The string is read from the buffer and index is increased by the string length
+		* @return The current size of the buffer in bytes.
+		*/
+		std::string ReadString();
 
 
 		/**
 		* @brief Insert a 4 bytes integer into the buffer.
-		* 
+		*
 		* The bytes are inerted at the position pointed by the @c index, which is then
 		* automatically increased by the number of bytes inserted.
 		* @param value	The 4 bytes integer to be inserted.
@@ -64,8 +73,18 @@ namespace OpenClouds
 
 
 		/**
+		* @brief Insert a 4 bytes integer into the buffer.
+		*
+		* The bytes are inerted at the position pointed by the @c index, which is then
+		* automatically increased by the number of bytes inserted.
+		* @param value	The 4 bytes integer to be inserted.
+		*/
+		void WriteUint32(const uint32_t value);
+
+
+		/**
 		* @brief Insert a 2 bytes integer into the buffer.
-		* 
+		*
 		* The bytes are inserted at the position pointed by the @c index, which is then
 		* automatically increased by the number of bytes inserted.
 		* @param value	The 2 bytes integer to be inserted.
@@ -73,13 +92,33 @@ namespace OpenClouds
 		void WriteInt16(const int16_t value);
 
 		/**
-		* @brief Insert a byte into the buffer.
+		* @brief Insert a 2 bytes unsigned integer into the buffer.
+		*
+		* The bytes are inserted at the position pointed by the @c index, which is then
+		* automatically increased by the number of bytes inserted.
+		* @param value	The 2 bytes integer to be inserted.
+		*/
+		void WriteUint16(const uint16_t value);
+
+		/**
+		* @brief Insert a signed byte  into the buffer.
 		* 
 		* The byte is inserted at the position pointed by the @c index, which is then
 		* automatically increased by 1.
 		* @param value	The byte to be inserted.
 		*/
 		void WriteInt8(const int8_t value);
+
+
+		/**
+		* @brief Insert an unsigned byte into the buffer.
+		*
+		* The unsigned byte is inserted at the position pointed by the @c index, which is then
+		* automatically increased by 1.
+		* @param value	The byte to be inserted.
+		*/
+		void WriteUint8(const uint8_t value);
+
 
 		/**
 		* @brief Insert generic data into the buffer.
@@ -154,13 +193,23 @@ namespace OpenClouds
 
 		/**
 		* @brief Read a 4 bytes integer from the buffer.
-		* 
+		*
 		* Reads and returns a 4 bytes integer from the buffer starting at position @c index.
 		* After reading, @c index is automatically increased by the number of bytes read.
 		*
 		* @return the integer read from the buffer.
 		*/
 		int32_t ReadInt32();
+
+		/**
+		* @brief Read a 4 bytes unsigned integer from the buffer.
+		*
+		* Reads and returns a 4 bytes integer from the buffer starting at position @c index.
+		* After reading, @c index is automatically increased by the number of bytes read.
+		*
+		* @return the integer read from the buffer.
+		*/
+		uint32_t ReadUint32();
 
 		/**
 		* @brief Read a 2 bytes integer from the buffer.
@@ -173,6 +222,16 @@ namespace OpenClouds
 		int16_t ReadInt16();
 
 		/**
+		* @brief Read a 2 bytes unsigned integer from the buffer.
+		*
+		* Reads and returns a 2 bytes integer from the buffer starting at position @c index.
+		* After reading, @c index is automatically increased by the number of bytes read.
+		*
+		* @return the integer read from the buffer.
+		*/
+		uint16_t ReadUint16();
+
+		/**
 		* @brief Read a byte integer from the buffer.
 		*
 		* Reads and returns a 1 byte integer from the buffer starting at position @c index.
@@ -182,6 +241,16 @@ namespace OpenClouds
 		*/
 		int8_t ReadInt8();
 
+		/**
+		* @brief Read a byte unsigned integer from the buffer.
+		*
+		* Reads and returns a 1 byte unsigned integer from the buffer starting at position @c index.
+		* After reading, @c index is automatically increased by 1.
+		*
+		* @return the integer read from the buffer.
+		*/
+		uint8_t ReadUint8();
+
 		/*
 		* @brief Reads and return the byte at position @p i.
 		*
@@ -190,7 +259,9 @@ namespace OpenClouds
 		* @param i	The position of the byte to read.
 		* @return The byte at position @p i.
 		*/
-		int8_t operator [](int i);
+		int8_t operator [](int i) const;
+
+		int8_t Buffer::GetByte(int i) const;
 
 		/*
 		* @brief utterly clears the buffer
