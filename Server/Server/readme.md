@@ -25,10 +25,8 @@ DECISIONS:
 nell'ordine di ricezione.
 Gestione pacchetti e files in swap con HD secondo limiti fissati.
 
-- Client: Ci sarà una cartella root contenente due cartelle: MyFiles, SharedFiles.
+- Client: Ci sarÃ  una cartella root contenente due cartelle: MyFiles, SharedFiles.
 Esempio: Supponiamo che l'utente 'Adriano' fa click destro su un suo file o una sua cartella (dentro MyFiles)
 -> condividi con -> Andrea.
 Andrea riceve la richiesta di condivisione (notifica), accetta, e si crea la cartella "Adriano" dentro "SharedFiles"
-nello storage locale di Andrea. Adriano può scegliere quali diritti conferire ad Andrea se ha condiviso una cartella
-intera invece di un file. Così Andrea può leggere oppure anche scrivere (aggiungere files o eliminarne), e tali modifiche
-si ripercuotono nella cartella locale di Adriano.
+nello storage locale di Andrea. Adriano puÃ² scegliere quali diritti conferire ad Andrea sul file / sulla cartella condivisa. CosÃ¬ Andrea puÃ² leggere oppure anche scrivere (aggiungere files, eliminarne o modificarne di esistenti), e tali modifiche si ripercuotono nella cartella locale di Adriano.
