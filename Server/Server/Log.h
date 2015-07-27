@@ -1,6 +1,4 @@
 #pragma once
-#ifndef OC_LOG_H
-#define OC_LOG_H
 
 #include <stdlib.h>
 #include <string>
@@ -17,5 +15,3 @@ namespace OpenClouds
 	};
 	
 }
-
-#endif // OC_LOG_H

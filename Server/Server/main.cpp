@@ -26,7 +26,7 @@ int main(void)
 	*/
 
 
-	Buffer* buf = new Buffer(1, 32);
+	Buffer* buf = new Buffer(16, 32);
 
 	cout << ">> start size: " << to_string(buf->GetSize()) << endl;
 
@@ -34,9 +34,8 @@ int main(void)
 	buf->WriteString("Hi m8!");
 
 	cout << ">> buf size after string: " << to_string(buf->GetSize()) << endl;
-
-	//get the third element
-	cout << (*buf)[3] << endl;
+	 
+	cout << "the third letter is: " << (*buf)[3] << endl;
 
 	buf->WriteInt32(-1000000);
 	buf->WriteInt32(1000000);

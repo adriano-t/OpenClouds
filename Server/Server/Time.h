@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef OC_TIME_H
-#define OC_TIME_H
-
 #include <cstdint>
 
 namespace OpenClouds
@@ -53,5 +50,3 @@ namespace OpenClouds
 	};
 }
 
-
-#endif

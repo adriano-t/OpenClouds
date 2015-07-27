@@ -1,6 +1,4 @@
 #pragma once
-#ifndef TCPSERVER_H
-#define TCPSERVER_H
 
 /*
 * TCP Server handles tcp packets. YOLO
@@ -24,5 +22,3 @@ namespace OpenClouds
 	static TCPServer& Server = TCPServer::Inst();
 }
 
-
-#endif
