@@ -3,16 +3,26 @@
 #include <stdint.h>
 #include <string>
 
+#include "ErrorHandling.h"
+
+
 namespace OpenClouds
 {
-
-	enum class BufferSeek{
-		Start, Relative, End
-	};
+	
 
 	/**
-	* @brief Buffer is a class which is a buffer.
+	* @brief Buffer implements a chunk of dynamic memory useful in binary data manipulations.
+	* Buffer initially contains blockSize bytes (default is 32) of available data. When a write 
+	* operation exceeds the available data, new chunks of blockSize bytes are allocated.
+    * Writing operations insert data at a position pointed by the local variable @c index 
+	* possibly replacing previously written data. After a write operation is performed, @c index is
+	* moved to the end of the data written. @c index may be changed with @c Seek or read with
+	* @c GetIndex . Reading operations extract data starting from @c index and then increase
+	* @c index by the number of bytes read.
+	* @c Reserved may be called to preallocate a certain amount of bytes.
 	*/
+
+	
 	class Buffer
 	{
 	private:
@@ -21,7 +31,6 @@ namespace OpenClouds
 		int index;
 		int blockSize;
 
-		//internal function, used only here
 		void IncreaseSize(const int amount);
 
 	public:
@@ -52,7 +61,7 @@ namespace OpenClouds
 		/**
 		* @brief Read a utf8 string from the buffer
 		*
-		* The string is read from the buffer and index is increased by the string length
+		* The string is read from the buffer and @c index is increased by the string length
 		* @return The current size of the buffer in bytes.
 		*/
 		std::string ReadString();
@@ -210,4 +219,3 @@ namespace OpenClouds
 
 	};
 }
-

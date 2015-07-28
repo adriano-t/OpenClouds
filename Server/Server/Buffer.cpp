@@ -1,12 +1,9 @@
-
-
 #include "Buffer.h"
 
-//test
 #include <iostream>
-
 #include <string>
 
+#include "Utils.h"
 using namespace std;
 
 namespace OpenClouds
@@ -36,20 +33,26 @@ namespace OpenClouds
 			index += offset;
 			break;
 		case BufferSeek::End:
-			index = size + offset; //WARNING: OUT OF BOUND
+			index = size + offset;
 			break;
 		}
+
+		if (index < 0 || index >= size)
+			throw(new IndexOutOfBound());
 	}
 
 	void Buffer::Seek(const int position)
 	{
-		index = position;
+		Seek(BufferSeek::Relative, position);
 	}
 
 	void Buffer::Clear()
 	{
 		//memfree(data)
 		index = 0;
+		delete[] data;
+		data = nullptr;
+		size = 0;
 	}
 
 	int Buffer::GetIndex() const
@@ -64,12 +67,10 @@ namespace OpenClouds
 
 	void Buffer::IncreaseSize(const int amount)
 	{
+		data = (int8_t*)std::realloc(data, size + amount);
+		if (data == nullptr)
+			throw(new BadRealloc(GetContext()));
 		size += amount;
-		if ((data = (int8_t*)realloc(data, size)) == nullptr)
-		{
-			throw;//new MemoryException("error: impossible to allocate the buffer"));
-		}
-
 	}
 
 	void Buffer::WriteInt32(const int32_t value)
@@ -81,7 +82,6 @@ namespace OpenClouds
 		int32_t* tempData = (int32_t*)(data + index);
 		*tempData = value;
 		index += 4;
-
 	}
 
 	int32_t Buffer::ReadInt32()
@@ -94,8 +94,7 @@ namespace OpenClouds
 		}
 		else
 		{
-			throw;//new BufferReadException("error: int32_t buffer size less than 4 bytes"));
-			return 0;
+			throw(new IndexOutOfBound());
 		}
 	}
 	 
@@ -121,8 +120,7 @@ namespace OpenClouds
 		}
 		else
 		{
-			throw;//new BufferReadException("error: int32_t buffer size less than 4 bytes"));
-			return 0;
+			throw( new IndexOutOfBound() );
 		}
 	} 
 
@@ -144,8 +142,7 @@ namespace OpenClouds
 		}
 		else
 		{
-			throw;//new BufferReadException("error: int32_t buffer size less than 4 bytes"));
-			return 0;
+			throw(new IndexOutOfBound());
 		}
 	}
 	 
@@ -153,9 +150,10 @@ namespace OpenClouds
 	{
 		// resize the data buffer realloc() 
 		this->size = size;
-		if ((data = (int8_t*)realloc(data, size)) == nullptr)
+		data = (int8_t*)std::realloc(data, size);
+		if (data == nullptr)
 		{
-			throw;//new MemoryException("error: impossible to allocate the buffer"));
+			throw(new BadRealloc());
 		}
 	}
 
@@ -164,9 +162,9 @@ namespace OpenClouds
 	{
 		if (i >= 0 && i < size)
 			return data[i];
-		else{
-			throw;//new MemoryException("error: impossible to allocate the buffer"));
-			return 0;
+		else
+		{
+			throw(new IndexOutOfBound());
 		}
 	}
 
@@ -175,7 +173,7 @@ namespace OpenClouds
 		if (i > 0 && i < size)
 			return data[i];
 		else{
-			throw;//(new MemoryException("error: impossible to allocate the buffer"))
+			throw(new IndexOutOfBound());
 			return 0;
 		}
 	} 
