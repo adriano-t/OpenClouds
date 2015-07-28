@@ -93,6 +93,7 @@
     <ClInclude Include="Packet.h" />
     <ClInclude Include="TCPServer.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.md" />

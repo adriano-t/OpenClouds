@@ -24,25 +24,19 @@ namespace OpenClouds
 			nestedException = nullptr;
 		}
 
-		Exception(const std::string errMessage) 
+		Exception(const std::string errContext) 
 			: Exception()
-		{
-			this->errMessage = errMessage;
-		}
-
-		Exception(const std::string errMessage, Exception* nestedException) 
-			: Exception(errMessage)
-		{
-			this->nestedException = nestedException;
-		}
-
-		Exception(const std::string errContext, const std::string errMessage) 
-			: Exception(errMessage)
 		{
 			this->errContext = errContext;
 		}
 
-		Exception(const std::string errContext, const std::string errMessage,
+		Exception(const std::string errContext, const std::string errMessage)
+			: Exception(errContext)
+		{
+			this->errMessage = errMessage;
+		}
+
+		Exception(const std::string errContext, const std::string errMessage, 
 			Exception* nestedException) : Exception(errContext, errMessage)
 		{
 			this->nestedException = nestedException;
@@ -59,14 +53,16 @@ namespace OpenClouds
 				className = typeid(*ptr).name();
 
 				if (ptr->errContext.length > 0)
-					Log::Write(header + "Exception occurred.\n" + className + " in [" + ptr->errContext + "]: ");
+					Log::Write(header + "Exception occurred.\n" + className + " in [" + 
+					ptr->errContext + "]: ", true);
 				else
-					Log::Write(header + "Exception occurred.\n" + className + " in [unknown context]: ");
+					Log::Write(header + "Exception occurred.\n" + className +
+					" in [unknown context]: ", true);
 
 				if (ptr->errMessage.length > 0)
-					Log::Write(header + ptr->errMessage);
+					Log::Write(header + ptr->errMessage, true);
 				else
-					Log::Write(header + "no error message.");
+					Log::Write(header + "no error message.", true);
 
 				ptr = ptr->nestedException;
 				header += "\t\t";
@@ -78,18 +74,16 @@ namespace OpenClouds
 	{
 	public:
 		IndexOutOfBound() : Exception() {};
-		IndexOutOfBound(const std::string errMessage) : Exception(errMessage) {};
-		IndexOutOfBound(const std::string errMessage, Exception* nestedException) :
-			Exception(errMessage, nestedException) {};
 	};
 
 	class BadRealloc : Exception
 	{
 	public:
 		BadRealloc() : Exception() {};
-		BadRealloc(const std::string errMessage) : Exception(errMessage) {};
-		BadRealloc(const std::string errMessage, Exception* nestedException) :
-			Exception(errMessage, nestedException) {};
+		BadRealloc(std::string errContext) : Exception(errContext) {};
+		BadRealloc(std::string errContext, std::string errMsg) : Exception(errContext, errMsg) {};
+		BadRealloc(std::string errContext, std::string errMsg, Exception* nestedException) 
+			: Exception(errContext, errMsg, nestedException) {};
 	};
 	enum class BufferSeek{
 		Start, Relative, End

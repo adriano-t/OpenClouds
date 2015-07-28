@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 
+#include "Utils.h"
 using namespace std;
 
 namespace OpenClouds
@@ -68,7 +69,7 @@ namespace OpenClouds
 	{
 		data = (int8_t*)std::realloc(data, size + amount);
 		if (data == nullptr)
-			throw(new BadRealloc());
+			throw(new BadRealloc(GetContext()));
 		size += amount;
 	}
 
