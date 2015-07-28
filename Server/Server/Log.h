@@ -14,4 +14,5 @@ namespace OpenClouds
 		static void Writeln(const std::string& text, const bool clean = false);
 	};
 	
+	
 }

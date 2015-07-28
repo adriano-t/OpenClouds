@@ -8,67 +8,27 @@
 
 #include "Time.h"
 #include "Buffer.h"
+#include "Utils.h"
+#include "ErrorHandling.h"
+
 using namespace std;
 using namespace OpenClouds;
 
 int main(void)
 {
+	//Log::Writeln("Ciao");
 
-	/* time.h test
-	OpenClouds::Time date1{ 2015, 12, 30, 18, 6, 7 };
-	OpenClouds::Time date2{ 2015, 12, 30, 18, 6, 8 };
-	cout << (date1 < date2 ? "lt" : "not lt") << endl;
-	cout << (date1 > date2 ? "gt" : "not gt") << endl;
-	cout << (date1 < date2 ? "e" : "not e") << endl;
-
-	cout << endl;
-	cout << "SELECT * FROM openclouds.users" << endl;
-	*/
-
-
-	Buffer* buf = new Buffer(16, 32);
-
-	cout << ">> start size: " << to_string(buf->GetSize()) << endl;
-
-
-	buf->WriteString("Hi m8!");
-
-	cout << ">> buf size after string: " << to_string(buf->GetSize()) << endl;
-	 
-	cout << "the third letter is: " << (*buf)[3] << endl;
-
-	buf->WriteInt32(-1000000);
-	buf->WriteInt32(1000000);
-
-	buf->WriteInt16(-4096);
-	buf->WriteInt16(4096);
-
-	buf->WriteInt8(-127);
-	buf->WriteInt8(255);
-
-	cout << ">> buf size after data: " << to_string(buf->GetSize()) << endl;
-	cout << ">> used bytes: " << to_string(buf->GetIndex()) << endl;
-
-	buf->Seek(0);
-
-	cout << "read: " << buf->ReadString() << endl;
-
-	cout << "read: " << to_string(buf->ReadInt32()) << endl;
-	cout << "read: " << to_string(buf->ReadInt32()) << endl;
-
-	cout << "read: " << to_string(buf->ReadInt16()) << endl;
-	cout << "read: " << to_string(buf->ReadInt16()) << endl;
-
-	cout << "read: " << to_string(buf->ReadInt8()) << endl;
-	cout << "read: " << to_string((uint8_t)buf->ReadInt8()) << endl;
-
+	BadRealloc* ioob = new BadRealloc(GetContext(), "Messaggio di errore.");
+	BadRealloc* ioob2 = new BadRealloc(GetContext(), "Messaggio 2.",(Exception*) ioob);
+	ioob2->pst();
+#if 0
 	try {
 		sql::Driver *driver;
 		sql::Connection *con;
 		sql::Statement *stmt;
 		sql::ResultSet *res;
 
-		/* Create a connection */
+		// Create a connection 
 		driver = get_driver_instance();
 		
 
@@ -81,7 +41,7 @@ int main(void)
 		sql::SQLString password = inputPassword.c_str();
 
 		con = driver->connect(hosting, user, password);
-		/* Connect to the MySQL test database */
+		// Connect to the MySQL test database
 		con->setSchema("openclouds");
 
 		stmt = con->createStatement();
@@ -106,8 +66,8 @@ int main(void)
 		cout << " (MySQL error code: " << e.getErrorCode();
 		cout << ", SQLState: " << e.getSQLState() << " )" << endl;
 	}
-
-
+#endif
+	
 	
 	cout << endl;
 	 

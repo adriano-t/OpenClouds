@@ -1,5 +1,8 @@
 #pragma once
 
+#include <string>
+
+
 #ifndef OC_FUNCTION_NAME
 #ifdef WIN32   //WINDOWS
 #define OC_FUNCTION_NAME  __FUNCTION__  
@@ -8,17 +11,10 @@
 #endif
 #endif
 
+#define GetContext() ( GetCodeFilename(__FILE__) + std::string("@") + std::string(OC_FUNCTION_NAME) + std::string(":") + OpenClouds::GetCodeLine(__LINE__))
 
 namespace OpenClouds
 {
-
-	std::string GetContext()
-	{
-		std::string res = __FILE__;
-		res += ":";
-		res += __LINE__;
-		res += " @";
-		res += OC_FUNCTION_NAME;
-		return(res);
-	}
+	std::string GetCodeLine(long line);
+	std::string GetCodeFilename(char* fn);
 }

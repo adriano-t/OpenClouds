@@ -8,19 +8,16 @@ namespace OpenClouds
 
 	class Exception
 	{
+	public:
+		std::string className;
 		std::string errMessage;
 		std::string errContext;
 		Exception* nestedException;
-
-		void printST()
-		{
-
-		}
-	public:
 		Exception()
 		{
 			errContext = "";
 			errMessage = "";
+			className = "OpenClouds::Exception";
 			nestedException = nullptr;
 		}
 
@@ -45,27 +42,26 @@ namespace OpenClouds
 		void PrintStackTrace()
 		{
 			Exception* ptr = this;
-			std::string header = "";
+			std::string header = "   ";
 			std::string className;
 
 			while (ptr != nullptr)
 			{
-				className = typeid(*ptr).name();
 
-				if (ptr->errContext.length > 0)
-					Log::Write(header + "Exception occurred.\n" + className + " in [" + 
+				if (ptr->errContext.length() > 0)
+					Log::Writeln(header + ptr->className + " occurred in [" + 
 					ptr->errContext + "]: ", true);
 				else
-					Log::Write(header + "Exception occurred.\n" + className +
-					" in [unknown context]: ", true);
+					Log::Writeln(header + ptr->className + " occurred in [unknown context]: ",
+					true);
 
-				if (ptr->errMessage.length > 0)
-					Log::Write(header + ptr->errMessage, true);
+				if (ptr->errMessage.length() > 0)
+					Log::Writeln(header + ptr->errMessage, true);
 				else
-					Log::Write(header + "no error message.", true);
+					Log::Writeln(header + "no error message.", true);
 
 				ptr = ptr->nestedException;
-				header += "\t\t";
+				header += "   ";
 			}
 		}
 	};
@@ -73,7 +69,7 @@ namespace OpenClouds
 	class IndexOutOfBound : Exception
 	{
 	public:
-		IndexOutOfBound() : Exception() {};
+		IndexOutOfBound() : Exception() { className = typeid(*this).name(); };
 	};
 
 	class BadRealloc : Exception
@@ -83,7 +79,13 @@ namespace OpenClouds
 		BadRealloc(std::string errContext) : Exception(errContext) {};
 		BadRealloc(std::string errContext, std::string errMsg) : Exception(errContext, errMsg) {};
 		BadRealloc(std::string errContext, std::string errMsg, Exception* nestedException) 
-			: Exception(errContext, errMsg, nestedException) {};
+			: Exception(errContext, errMsg, nestedException) {
+			className = "BadRealloc";
+		};
+		void pst() {
+			className = typeid(*this).name();
+			PrintStackTrace();
+		}
 	};
 	enum class BufferSeek{
 		Start, Relative, End
