@@ -2,6 +2,7 @@
 
 #include <string>
 #include "Log.h"
+#include "Utils.h"
 
 namespace OpenClouds
 {
@@ -17,24 +18,29 @@ namespace OpenClouds
 		{
 			errContext = "";
 			errMessage = "";
-			className = "OpenClouds::Exception";
+			className = typeid(*this).name();
 			nestedException = nullptr;
 		}
 
-		Exception(const std::string errContext) 
+		Exception(const std::string className)
 			: Exception()
+		{
+			this->className = className;
+		}
+		Exception(const std::string className, const std::string errContext) 
+			: Exception(className)
 		{
 			this->errContext = errContext;
 		}
 
-		Exception(const std::string errContext, const std::string errMessage)
-			: Exception(errContext)
+		Exception(const std::string className, const std::string errContext, const std::string errMessage)
+			: Exception(className, errContext)
 		{
 			this->errMessage = errMessage;
 		}
 
-		Exception(const std::string errContext, const std::string errMessage, 
-			Exception* nestedException) : Exception(errContext, errMessage)
+		Exception(const std::string className, const std::string errContext, const std::string errMessage,
+			Exception* nestedException) : Exception(className, errContext, errMessage)
 		{
 			this->nestedException = nestedException;
 		}
@@ -42,52 +48,54 @@ namespace OpenClouds
 		void PrintStackTrace()
 		{
 			Exception* ptr = this;
-			std::string header = "   ";
+			std::string header = " ";
 			std::string className;
 
 			while (ptr != nullptr)
 			{
 
 				if (ptr->errContext.length() > 0)
-					Log::Writeln(header + ptr->className + " occurred in [" + 
+					Log::Writeln(header + "Exception " + ptr->className + " occurred in [" + 
 					ptr->errContext + "]: ", true);
 				else
-					Log::Writeln(header + ptr->className + " occurred in [unknown context]: ",
-					true);
+					Log::Writeln(header + "Exception " + ptr->className + 
+					" occurred in [unknown context]: ", true);
 
 				if (ptr->errMessage.length() > 0)
 					Log::Writeln(header + ptr->errMessage, true);
 				else
-					Log::Writeln(header + "no error message.", true);
+					Log::Writeln(header + "No error message.", true);
 
 				ptr = ptr->nestedException;
-				header += "   ";
+				header += "  ";
 			}
 		}
 	};
 
-	class IndexOutOfBound : Exception
+	class IndexOutOfBound : public Exception
 	{
 	public:
-		IndexOutOfBound() : Exception() { className = typeid(*this).name(); };
+		IndexOutOfBound() : Exception(ClassName) {};
+		IndexOutOfBound(const std::string errContext) : Exception(ClassName, errContext) {};
+		IndexOutOfBound(const std::string errContext, const std::string errMsg)
+			: Exception(ClassName, errContext, errMsg) {};
+		IndexOutOfBound(const std::string errContext, const std::string errMsg, Exception* nestedException)
+			: Exception(ClassName, errContext, errMsg, nestedException) {};
 	};
 
-	class BadRealloc : Exception
+	class BadRealloc : public Exception
 	{
 	public:
-		BadRealloc() : Exception() {};
-		BadRealloc(std::string errContext) : Exception(errContext) {};
-		BadRealloc(std::string errContext, std::string errMsg) : Exception(errContext, errMsg) {};
-		BadRealloc(std::string errContext, std::string errMsg, Exception* nestedException) 
-			: Exception(errContext, errMsg, nestedException) {
-			className = "BadRealloc";
-		};
-		void pst() {
-			className = typeid(*this).name();
-			PrintStackTrace();
-		}
+		BadRealloc() : Exception(ClassName) {};
+		BadRealloc(std::string errContext) : Exception(ClassName, errContext) {};
+		BadRealloc(std::string errContext, std::string errMsg)
+			: Exception(ClassName, errContext, errMsg) {}
+		BadRealloc(std::string errContext, std::string errMsg, Exception* nestedException)
+			: Exception(ClassName, errContext, errMsg, nestedException) {}
 	};
-	enum class BufferSeek{
+
+	enum class BufferSeek
+	{
 		Start, Relative, End
 	};
 }

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "Utils.h"
+
 using namespace std;
 
 namespace OpenClouds
@@ -42,7 +43,7 @@ namespace OpenClouds
 
 	void Buffer::Seek(const int position)
 	{
-		Seek(BufferSeek::Relative, position);
+		Seek(BufferSeek::Start, position);
 	}
 
 	void Buffer::Clear()
@@ -68,7 +69,7 @@ namespace OpenClouds
 	{
 		data = (int8_t*)std::realloc(data, size + amount);
 		if (data == nullptr)
-			throw(new BadRealloc(GetContext()));
+			throw(new BadRealloc(AppContext));
 		size += amount;
 	}
 

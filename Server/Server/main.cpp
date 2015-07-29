@@ -17,10 +17,11 @@ using namespace OpenClouds;
 int main(void)
 {
 	//Log::Writeln("Ciao");
-
-	BadRealloc* ioob = new BadRealloc(GetContext(), "Messaggio di errore.");
-	BadRealloc* ioob2 = new BadRealloc(GetContext(), "Messaggio 2.",(Exception*) ioob);
-	ioob2->pst();
+	Exception* bas = new Exception();
+	BadRealloc* brac = new BadRealloc(AppContext, "Messaggio di errore.", bas);
+	BadRealloc* brac2 = new BadRealloc(AppContext, "Messaggio di errore 2.", brac);
+	IndexOutOfBound* ioob = new IndexOutOfBound(AppContext, "Cazzo! L'indice no!", brac2);
+	ioob->PrintStackTrace();
 #if 0
 	try {
 		sql::Driver *driver;
