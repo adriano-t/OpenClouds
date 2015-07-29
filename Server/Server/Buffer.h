@@ -11,18 +11,18 @@ namespace OpenClouds
 	
 
 	/**
-	* @brief Buffer implements a chunk of dynamic memory useful in binary data manipulations.
-	* Buffer initially contains blockSize bytes (default is 32) of available data. When a write 
-	* operation exceeds the available data, new chunks of blockSize bytes are allocated.
-    * Writing operations insert data at a position pointed by the local variable @c index 
-	* possibly replacing previously written data. After a write operation is performed, @c index is
-	* moved to the end of the data written. @c index may be changed with @c Seek or read with
-	* @c GetIndex . Reading operations extract data starting from @c index and then increase
-	* @c index by the number of bytes read.
-	* @c Reserved may be called to preallocate a certain amount of bytes.
+	* \brief Buffer implements a chunk of dynamic memory useful in binary data manipulations.
+	* \par 
+	* Buffer initially contains \c blockSize bytes (default is 32) of available data. 
+	* <br> When a write
+	* operation exceeds the available data, new chunks of \c blockSize bytes are allocated. <br>
+    * Writing operations insert data at a position pointed by the local variable \c index 
+	* possibly replacing previously written data. After a write operation is performed, \c index is
+	* moved to the end of the data written.<br> \c index may be changed with Seek() or read with
+	* GetIndex() .<br> Reading operations extract data starting from \c index and then increase
+	* \c index by the number of bytes read. <br>
+	* Reserve() may be called to preallocate a certain amount of bytes.
 	*/
-
-	
 	class Buffer
 	{
 	private:

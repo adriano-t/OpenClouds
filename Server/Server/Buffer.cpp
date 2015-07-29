@@ -48,7 +48,6 @@ namespace OpenClouds
 
 	void Buffer::Clear()
 	{
-		//memfree(data)
 		index = 0;
 		delete[] data;
 		data = nullptr;
