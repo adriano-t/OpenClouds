@@ -56,15 +56,15 @@ namespace OpenClouds
 
 				if (ptr->errContext.length() > 0)
 					Log::Writeln(header + "Exception " + ptr->className + " occurred in [" + 
-					ptr->errContext + "]: ", true);
+					ptr->errContext + "]: ", Log::Error, true);
 				else
 					Log::Writeln(header + "Exception " + ptr->className + 
-					" occurred in [unknown context]: ", true);
+					" occurred in [unknown context]: ", Log::Error, true);
 
 				if (ptr->errMessage.length() > 0)
-					Log::Writeln(header + ptr->errMessage, true);
+					Log::Writeln(header + ptr->errMessage, Log::Error, true);
 				else
-					Log::Writeln(header + "No error message.", true);
+					Log::Writeln(header + "No error message.", Log::Error, true);
 
 				ptr = ptr->nestedException;
 				header += "  ";
