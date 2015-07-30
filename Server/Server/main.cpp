@@ -22,6 +22,9 @@ int main(void)
 	BadRealloc* brac2 = new BadRealloc(AppContext, "Messaggio di errore 2.", brac);
 	IndexOutOfBound* ioob = new IndexOutOfBound(AppContext, "Cazzo! L'indice no!", brac2);
 	ioob->PrintStackTrace();
+	
+	Log::Writeln("Ciao!");
+	Log::Writeln("Inizializzazione in corso.");
 #if 0
 	try {
 		sql::Driver *driver;

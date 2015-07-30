@@ -2,6 +2,8 @@
 #include <ctime>
 
 #include "Log.h"
+#include "Utils.h"
+
 
 namespace OpenClouds
 {
@@ -13,6 +15,7 @@ namespace OpenClouds
 		if (!clean)
 		{
 			// SET CONSOLE COLOR TO GREEN
+			SetConsoleColor(green);
 
 			std::cout << "[" << appName << "] ";
 			time_t t = time(0); // get time now
@@ -22,26 +25,31 @@ namespace OpenClouds
 				<< (now.tm_mon + 1) << '/'
 				<< now.tm_mday << "-"
 				<< now.tm_hour << ":"
-				<< now.tm_min << ":";
+				<< now.tm_min << ":"
+				<< now.tm_sec;
 
 			// SET CONSOLE COLOR TO LIGHT GRAY
-
-			std::cout << now.tm_sec << "   >>   ";
+			SetConsoleColor(dark_white);
+			std::cout << " >> ";
 		}
 
 		switch (lt)
 		{
 		case(Normal) :
 			// SET CONSOLE COLOR TO LIGHT GRAY
+			SetConsoleColor(dark_white);
 			break;
 		case(Warning) :
 			// SET CONSOLE COLOR TO YELLOW
+			SetConsoleColor(yellow);
 			break;
 		case(Error) :
-			// SET CONSOLE COLOR TO RED
+			// SET CONSOLE COLOR TO RED+
+			SetConsoleColor(red);
 			break;
 		case(Good) :
 			// SET CONSOLE COLOR TO GREEN
+			SetConsoleColor(green);
 			break;
 		}
 
@@ -50,6 +58,7 @@ namespace OpenClouds
 
 
 		// RESET CONSOLE COLOR TO LIGHT GRAY
+		SetConsoleColor(white);
 
 	}
 	void Log::Write(const std::string& text, const LogType lt)
@@ -75,4 +84,7 @@ namespace OpenClouds
 	}
 
 
+
+
 }
+
