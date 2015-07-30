@@ -4,6 +4,8 @@
 #include "Log.h"
 #include "Utils.h"
 
+#include <iostream>
+
 namespace OpenClouds
 {
 
@@ -54,17 +56,22 @@ namespace OpenClouds
 			while (ptr != nullptr)
 			{
 
+
 				if (ptr->errContext.length() > 0)
-					Log::Writeln(header + "Exception " + ptr->className + " occurred in [" + 
-					ptr->errContext + "]: ", Log::Error, true);
+					//Log::Writeln(header + "Exception " + ptr->className + " occurred in [" + 
+					//ptr->errContext + "]: ", Log::Error, true);
+					std::cout << header + "Exception " + ptr->className + " occurred in [" + ptr->errContext + "]: " << std::endl;
 				else
-					Log::Writeln(header + "Exception " + ptr->className + 
-					" occurred in [unknown context]: ", Log::Error, true);
+					std::cout << header + "Exception " + ptr->className + " occurred in [unknown context]: " << std::endl;
+					//Log::Writeln(header + "Exception " + ptr->className + 
+					//" occurred in [unknown context]: ", Log::Error, true);
 
 				if (ptr->errMessage.length() > 0)
-					Log::Writeln(header + ptr->errMessage, Log::Error, true);
+					std::cout << "errMessage" << std::endl;
+					//Log::Writeln(header + ptr->errMessage, Log::Error, true);
 				else
-					Log::Writeln(header + "No error message.", Log::Error, true);
+					std::cout << header + "No error message." << std::endl;
+					//Log::Writeln(header + "No error message.", Log::Error, true);
 
 				ptr = ptr->nestedException;
 				header += "  ";

@@ -11,10 +11,9 @@
 #endif
 #endif
 
-#define AppContext ( OpenClouds::GetFilename(__FILE__) + std::string("@") + std::string(OC_FUNCTION_NAME) + std::string(":") + OpenClouds::IToS(__LINE__))
+#define AppContext ( OpenClouds::GetFilename(__FILE__) + "@" + OC_FUNCTION_NAME + ":" + std::to_string(__LINE__))
 #define ClassName  (typeid(*this).name())
 namespace OpenClouds
 {
-	std::string IToS(long line);
 	std::string GetFilename(const char* fn);
 }
