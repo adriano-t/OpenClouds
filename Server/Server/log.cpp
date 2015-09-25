@@ -29,7 +29,7 @@ namespace OpenClouds
 				<< now.tm_sec;
 
 			// SET CONSOLE COLOR TO LIGHT GRAY
-			SetConsoleColor(dark_white);
+			SetConsoleColor(white);
 			std::cout << " >> ";
 		}
 
@@ -58,7 +58,7 @@ namespace OpenClouds
 
 
 		// RESET CONSOLE COLOR TO LIGHT GRAY
-		SetConsoleColor(white);
+		SetConsoleColor(dark_white);
 
 	}
 	void Log::Write(const std::string& text, const LogType lt)
