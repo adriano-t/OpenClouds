@@ -1,5 +1,7 @@
 #include "Client.h"
-
+#include <stdio.h>
+#include <io.h>
+#include <fcntl.h>
 /*
 What does client do?
 1) At startup perform a full sync with the remote server
@@ -8,7 +10,13 @@ What does client do?
 */
 
 
-int main()
+int CALLBACK WinMain(
+	HINSTANCE   hInstance,
+	HINSTANCE   hPrevInstance,
+	LPSTR       lpCmdLine,
+	int         nCmdShow
+	)
 {
 
+	return(0);
 }
