@@ -6,4 +6,5 @@
 #include <iostream>
 #include "Ini.h"
 #include "Client.h"
+#include <inttypes.h>
 #endif // INCLUDES_H
