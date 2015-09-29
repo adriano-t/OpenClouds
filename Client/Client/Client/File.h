@@ -1,6 +1,5 @@
 #ifndef FILE_H
 #define FILE_H
-#include "Includes.h"
 class FileReader
 {
 private:
@@ -13,5 +12,4 @@ public:
 	uint8_t  operator[](uint64_t i);
 	uint64_t length() { return len; }
 };
-
 #endif // FILE_H
