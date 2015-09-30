@@ -1,10 +1,8 @@
 #include "includes.h"
 unsigned char FileReader::operator[](uint64_t pos)
 {
-	static const int32_t buffSize = 1000000;
-	static uint8_t  buffer[buffSize]; // 1 MB buffer
-	static uint64_t start_pos = 0;
-	static uint64_t end_pos = 0;
+	start_pos = 0;
+	end_pos = 0;
 
 	if (src == NULL) // Not initialized
 		return(0);
@@ -91,7 +89,6 @@ void GetFDiffRec(FileReader& newFile, FileReader& oldFile, int64_t p1, int64_t p
 	{
 		newPtr++;
 		oldPtr++;
-
 		
 		if (newPtr >= newLength - 1 || oldPtr >= oldLength - 1)
 			// Either new or old file was completely read
