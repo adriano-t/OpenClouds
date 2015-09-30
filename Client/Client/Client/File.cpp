@@ -10,12 +10,12 @@ unsigned char FileReader::operator[](uint64_t pos)
 		return(0);
 	
 	// If pos belongs to preloaded data, retrieve it
-	if (pos >= start_pos && pos <= end_pos)
+	if (pos >= start_pos && pos < end_pos)
 		return(buffer[pos - start_pos]);
 
 	// otherwise, reload
 	fseek(src, pos, SEEK_SET);
-	end_pos = (uint64_t)fread(buffer, 1, buffSize, src) + start_pos - 1;
+	end_pos = (uint64_t)fread(buffer, 1, buffSize, src) + start_pos;
 	start_pos = pos;
 	return(buffer[0]);
 }
