@@ -1,5 +1,4 @@
-#include "Ini.h"
-
+#include "includes.h"
 Ini::Ini(const std::string& fname)
 {
 	values = nullptr;
