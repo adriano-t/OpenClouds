@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include <inttypes.h>
+#include <sstream>
 
 #include "Ini.h"
 #include "Client.h"
