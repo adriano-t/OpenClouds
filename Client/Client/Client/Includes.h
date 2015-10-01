@@ -7,6 +7,9 @@
 #include <iostream>
 #include <inttypes.h>
 #include <sstream>
+#include <list>
+#include <assert.h>
+
 
 #include "Ini.h"
 #include "Client.h"
