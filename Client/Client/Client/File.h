@@ -1,13 +1,13 @@
-#ifndef FILE_H
-#define FILE_H
-#define BUFFSIZE 1000000
+#ifndef OC_FILE_H
+#define OC_FILE_H
+#define OC_FILE_BUFFSIZE 1000000
 class FileReader
 {
 private:
 	FILE* src;
 	uint64_t len;
-	const int32_t buffSize = BUFFSIZE;
-	uint8_t  buffer[BUFFSIZE];
+	const int32_t buffSize = OC_FILE_BUFFSIZE;
+	uint8_t  buffer[OC_FILE_BUFFSIZE];
 	uint64_t start_pos = 0;
 	uint64_t end_pos = 0;
 public:
@@ -18,5 +18,5 @@ public:
 	uint64_t length() { return len; }
 };
 
-void GetFDiff(FileReader& fileNew, FileReader& fileOld);
+void GetFDiff(FileReader* fileNew, FileReader* fileOld);
 #endif // FILE_H
