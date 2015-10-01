@@ -9,7 +9,7 @@
 #include <sstream>
 #include <list>
 #include <assert.h>
-
+#include <stack>
 
 #include "Ini.h"
 #include "Client.h"
