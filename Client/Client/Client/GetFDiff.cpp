@@ -66,7 +66,7 @@ struct TreeNode
 
 
 void GetFDiffRec(FileReader* newFile, FileReader* oldFile, int64_t p1, int64_t p2, TreeNode& root);
-void GetFDiff(FileReader* newFile, FileReader* oldFile)
+std::stack<diff*>* GetFDiff(FileReader* newFile, FileReader* oldFile)
 {
 	TreeNode root;
 	root.type = TreeNode::TreeNodeType::Root;
@@ -74,8 +74,44 @@ void GetFDiff(FileReader* newFile, FileReader* oldFile)
 	GetFDiffRec(newFile, oldFile, 0, 0, root);
 
 	int a = 3;
-	// Traverse the structure and list the leaves
+	
+	// Find best leave
+	TreeNode* best = nullptr;
+	TreeNode* tmp;
+	for (std::list<void*>::iterator it = ::leaves.begin(); it != ::leaves.end(); ++it)
+	{
+		tmp = reinterpret_cast<TreeNode*>(*it);
+		if (best == nullptr)
+			best = tmp;
+		else if (tmp->realWeight < best->realWeight)
+			best = tmp;
+	}
+	// Fill a stack with all the diffs to the best leave
+	std::stack<diff*>* diffs = new std::stack<diff*>();
+	while (best != nullptr)
+	{
+		diff* d = new diff;
+		d->len = best->howMuch;
+		d->pos = best->where;
+		// Convert TreeNode to diff
+		switch (best->type)
+		{
+		case(TreeNode::TreeNodeType::Insertion) :
+			d->type = diff::DiffType::Insertion;
+			break;
+		case(TreeNode::TreeNodeType::Deletion) :
+			d->type = diff::DiffType::Deletion;
+			break;
+		default:
+			break;
+		}
+		diffs->push(d);
+		best = best->parent;
+	}
 
+	// todo: clear Tree & ::leaves
+
+	return diffs;
 }
 void GetFDiffRec(FileReader* _newFile, FileReader* _oldFile, int64_t p1, int64_t p2, TreeNode& root)
 {
@@ -91,10 +127,21 @@ void GetFDiffRec(FileReader* _newFile, FileReader* _oldFile, int64_t p1, int64_t
 		oldPtr++;
 
 		if (newPtr >= newLength - 1 || oldPtr >= oldLength - 1)
-			// Either new or old file was completely read
-			// todo: if one file reached eof and the other did not
-			// commit change as last node.
-			return;
+		{
+			if (newPtr >= newLength - 1 && oldPtr < oldLength - 1)
+			{
+				// oldFile remaining was deleted
+				TreeNode* tn = new TreeNode;
+				tn->where = oldPtr;
+				tn->howMuch = oldLength - oldPtr;
+				tn->type = TreeNode::TreeNodeType::Deletion;
+				tn->weight = 3;
+				root.addChild(tn);
+
+				// Eof reached, no need for more recursion
+				return;
+			}
+		}
 	}
 
 	// ******************************************************************************
@@ -125,7 +172,6 @@ void GetFDiffRec(FileReader* _newFile, FileReader* _oldFile, int64_t p1, int64_t
 			tn2->where = newPtr;
 			tn2->howMuch = newLength - newPtr;
 			tn2->weight = 3;
-			//todo: setup data
 			tn->addChild(tn2);
 
 
@@ -151,7 +197,7 @@ void GetFDiffRec(FileReader* _newFile, FileReader* _oldFile, int64_t p1, int64_t
 	// ******************************************************************************
 	// ****************** DELETION **************************************************
 	// ******************************************************************************
-	// Some data of oldFile were deleted and are not present in newFile
+	// Some data of oldFile was deleted and is not present in newFile
 	// So the first 5 bytes of newFile should be present somewhere
 	// after this point in oldFile
 	int oldIndex = oldPtr + 1;

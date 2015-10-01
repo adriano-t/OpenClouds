@@ -17,6 +17,11 @@ public:
 	uint8_t  operator[](uint64_t i);
 	uint64_t length() { return len; }
 };
-
-void GetFDiff(FileReader* fileNew, FileReader* fileOld);
+struct diff
+{
+	enum DiffType{ Insertion, Deletion } type;
+	int64_t pos, len;
+};
+typedef std::stack<diff*>& Diffs;
+std::stack<diff*>* GetFDiff(FileReader* fileNew, FileReader* fileOld);
 #endif // FILE_H
